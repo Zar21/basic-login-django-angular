@@ -8,7 +8,7 @@ app_name = 'authentication'
 urlpatterns = [
     url(r'^user/?$', UserViewSet.as_view({
         'get': 'list',
-        'post': 'create'
+        'post': 'create',
     })),
     url(r'^login/?$', LoginAPIView.as_view()),
 ]
