@@ -5,9 +5,36 @@ from .models import CustomUser
 
 class UserSerializer(serializers.ModelSerializer):
 
+    password = serializers.CharField(
+        max_length=128,
+        min_length=8,
+        write_only=True
+    )
+
     class Meta:
         model = CustomUser
-        fields = ['username', 'first_name', 'last_name', 'email', 'avatar', 'password']
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'avatar',
+            'password',
+            'token'
+        ]
+        read_only_fields = ('token',)
+
+    def update(self, instance, validated_data):
+        """Performs an update on a User."""
+
+        password = validated_data.pop('password', None)
+        for (key, value) in validated_data.items():
+            setattr(instance, key, value)
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)

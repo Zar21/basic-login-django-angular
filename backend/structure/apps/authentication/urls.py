@@ -1,14 +1,11 @@
-from django.conf.urls import include, url
+from django.conf.urls import url
 from .views import (
-    UserViewSet, LoginAPIView
+    UserViewUpdate, LoginAPIView
 )
 
 app_name = 'authentication'
 
 urlpatterns = [
-    url(r'^user/?$', UserViewSet.as_view({
-        'get': 'list',
-        'post': 'create',
-    })),
+    url(r'^user/?$', UserViewUpdate.as_view()),
     url(r'^login/?$', LoginAPIView.as_view()),
 ]
