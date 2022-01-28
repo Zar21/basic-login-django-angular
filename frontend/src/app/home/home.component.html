@@ -1,2 +1,58 @@
-﻿<h1>Hi {{currentUser.username}}!</h1>
-<p>You're logged in with Angular 8!!</p>
+﻿<div *ngIf="!update">
+    <div class="row">
+        <div class="col-3">
+            <img width="100" src="{{backend_url}}{{currentUser.avatar}}"/>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-7">
+            <div><strong>First Name: </strong>{{currentUser.first_name}}</div>
+            <div><strong>Last Name: </strong>{{currentUser.last_name}}</div>
+            <div><strong>Username: </strong>{{currentUser.username}}</div>
+            <div><strong>Email: </strong>{{currentUser.email}}</div>
+        </div>
+    </div>
+    <button *ngIf="!update" (click)="updateButton(true)" class="btn btn-primary">
+        Update Data
+    </button>
+</div>
+<form *ngIf="update" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="avatar">Avatar</label>
+        <input id="avatar" (change)="upload($event)" type="file" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input id="first_name" type="text" formControlName="first_name" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input id="last_name" type="text" formControlName="last_name" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': f.username.errors }" />
+        <div *ngIf="f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': f.email.errors }" />
+        <div *ngIf="f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Email is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': f.password.errors }" />
+        <div *ngIf="f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">
+            Update
+        </button>
+    </div>
+</form>
+<button *ngIf="update" (click)="updateButton(false)" class="btn btn-primary">Return</button>

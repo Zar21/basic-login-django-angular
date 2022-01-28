@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -27,6 +27,26 @@ export class AuthenticationService {
                 this.currentUserSubject.next(user);
                 return user;
             }));
+    }
+
+    editUser(form) {
+        var formData: any = new FormData();
+        for (var [key, value] of Object.entries(form)) {
+          if (value) {
+            formData.append(key, value);
+          }
+        }
+        const httpOptions = {
+            headers: new HttpHeaders({
+              "Authorization": "Bearer " + JSON.parse(localStorage.getItem("currentUser"))["token"]
+            })
+          };
+        return this.http.put<any>(`${environment.api}/user`, formData, httpOptions)
+            .pipe(map(user => {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+            }));;
     }
 
     logout() {
