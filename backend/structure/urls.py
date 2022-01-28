@@ -22,4 +22,4 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url('api-auth/', include('rest_framework.urls')),
     url('api/', include('structure.apps.authentication.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # url for the avatar

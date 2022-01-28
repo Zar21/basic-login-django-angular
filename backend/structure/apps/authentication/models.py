@@ -13,12 +13,12 @@ class CustomUser(AbstractUser):
     email = models.EmailField(db_index=True, unique=True)
     first_name = models.CharField(db_index=True, max_length=255)
     last_name = models.CharField(db_index=True, max_length=255)
-    avatar = models.ImageField(max_length=255, upload_to=f'images/', null=True, blank=True)
+    avatar = models.ImageField(
+        max_length=255, upload_to=f'images/', null=True, blank=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
     objects = CustomUserManager()
-    
 
     def __str__(self):
         return self.email

@@ -6,6 +6,6 @@ from .views import (
 app_name = 'authentication'
 
 urlpatterns = [
-    url(r'^user/?$', UserViewUpdate.as_view()),
-    url(r'^login/?$', LoginAPIView.as_view()),
+    url(r'^user/?$', UserViewUpdate.as_view()),  # get and update user data
+    url(r'^login/?$', LoginAPIView.as_view()),  # post to login
 ]

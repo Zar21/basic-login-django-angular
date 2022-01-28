@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
             email: ['', Validators.required],
             password: ['', Validators.required]
         });
-
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
@@ -36,11 +35,9 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
         if (this.loginForm.invalid) {
             return;
         }
-
         this.loading = true;
         this.authenticationService.login(
             this.f.email.value, 
