@@ -61,11 +61,23 @@ password: admin
 
 url: http://localhost:8000/admin
 
+<img src="image1.png">
+
 Create a user from the administration panel
+
+<img src="image2.png">
 
 Go to frontend and try to log with the created credentials
 
+<img src="image3.png">
+
+<img src="image4.png">
+
 Once logged in, edit the user data
+
+<img src="image5.png">
+
+<img src="image6.png">
 
 ## Authors
 

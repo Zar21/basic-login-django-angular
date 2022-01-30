@@ -1,7 +1,7 @@
 ﻿<div *ngIf="!update">
     <div class="row">
         <div class="col-3">
-            <img width="100" src="{{backend_url}}{{currentUser.avatar}}"/>
+            <img width="100" *ngIf="currentUser.avatar" src="{{backend_url}}{{currentUser.avatar}}"/>
         </div>
         <div class="col-2"></div>
         <div class="col-7">
